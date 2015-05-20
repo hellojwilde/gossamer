@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fontawesome-webfont.woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  -moz-appearance: none;
+  background-color: transparent;
+  background-image: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  border-width: 0;
+  font-family: "Helvetica", sans-serif;
+  font-size: 12px;
+  /* image-rendering: -moz-crisp-edges; */
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+*::-moz-focus-inner {
+  border: 0;
+}
+
+/* Prevents scrollbars to show up with out-of-window elements */
+body {
+  height: 100vh;
+  overflow: hidden;
+}
