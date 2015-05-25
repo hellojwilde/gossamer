@@ -2,14 +2,21 @@
 
 var child = require('child_process');
 var http = require('http');
-var ecstatic = require('ecstatic');
 var path = require('path');
+var webpack = require('webpack');
+var webpackConfig = require('../webpack.config');
 
+var WebpackDevServer = require('webpack-dev-server');
 
 process.title = 'browser.html';
 
-var server = http.createServer(ecstatic({root: path.join(module.filename, '../..')}));
-server.listen(6060);
+var server = new WebpackDevServer(webpack(webpackConfig), {
+  contentBase: path.resolve(__dirname, '..'),
+  publicPath: webpackConfig.output.publicPath,
+  hot: true
+});
+
+server.listen(6060, 'localhost');
 
 var app = child.spawn('/Applications/B2G.app/Contents/MacOS/graphene', [
   '--profile', './.profile', '--start-manifest=http://localhost:6060/manifest.webapp'
