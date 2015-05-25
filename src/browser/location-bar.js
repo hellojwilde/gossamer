@@ -182,10 +182,7 @@ define((require, exports, module) => {
            webView.securityState == 'secure' ? '\uf023' : ''), // Lock
         DOM.span({
           key: 'location',
-          style: theme.locationText,
-          style: {
-            fontWeight: 'bold'
-          }
+          style: mix(theme.locationText, {fontWeight: 'bold'})
         },
         webView.uri ? getDomainName(webView.uri) : ''),
         DOM.span({
