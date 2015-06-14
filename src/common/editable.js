@@ -56,7 +56,6 @@ define((require, exports, module) => {
 
   class InputField extends Component {
     constructor() {
-      super();
       this.onKeyDown = this.onKeyDown.bind(this);
     }
     onKeyDown(event) {
