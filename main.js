@@ -27,6 +27,9 @@ require.config({
     pouchdb: {
       exports: 'PouchDB'
     }
+  },
+  config: {
+    'browser/updater': {/* INJECTED_UPDATER_INFO */}
   }
 });
 

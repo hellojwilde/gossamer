@@ -9,7 +9,7 @@ define((require, exports, module) => {
   const {render} = require('common/render');
   const {Browser} = require('./browser');
   const {readSession, resetSession} = require('./actions');
-  const {appUpdateAvailable} = require('./github');
+  const {appUpdateAvailable} = require('./update');
 
   window.renderer = render(Browser, readSession() || resetSession(),
                            document.body);
