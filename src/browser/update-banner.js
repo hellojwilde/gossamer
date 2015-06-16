@@ -16,11 +16,18 @@ define((require, exports, module) => {
 
   const Updates = Record({
     appUpdateAvailable: Boolean(false),
+    appUpdateUrl: String(),
     runtimeUpdateAvailable: Boolean(false)
   });
 
-  Updates.setAppUpdateAvailable = updates => updates.set('appUpdateAvailable', true);
-  Updates.setRuntimeUpdateAvailable = updates => updates.set('runtimeUpdateAvailable', true);
+  Updates.setAppUpdateAvailable = (url, updates) => 
+    updates.merge({
+      appUpdateAvailable: true,
+      appUpdateUrl: url
+    });
+
+  Updates.setRuntimeUpdateAvailable = updates => 
+    updates.set('runtimeUpdateAvailable', true);
 
   // Style
 
@@ -90,7 +97,9 @@ define((require, exports, module) => {
             sendEventToChrome('restart')
           }
           if (!updates.runtimeUpdateAvailable && updates.appUpdateAvailable) {
-            sendEventToChrome('clear-cache-and-reload');
+            sendEventToChrome('bootstrap-with-new-manifest', {
+              manifestURL: updates.appUpdateUrl
+            });
           }
         }
       }, buttonMessage)

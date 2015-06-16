@@ -14,8 +14,10 @@ define((require, exports, module) => {
   window.renderer = render(Browser, readSession() || resetSession(),
                            document.body);
 
-  appUpdateAvailable.then(() => {
-    dispatchEvent(new CustomEvent('app-update-available'));
+  appUpdateAvailable.then((updateManifestUrl) => {
+    dispatchEvent(new CustomEvent('app-update-available', {
+      detail: updateManifestUrl
+    }));
   }, () => {
     console.log('Not checking for updates');
   });
