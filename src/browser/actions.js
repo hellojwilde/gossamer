@@ -24,8 +24,8 @@ define((require, exports, module) => {
   const makeAboutURL = input =>
     getBaseURI() + 'src/about/' + input.replace('about:', '') + '/index.html';
 
-  const sendEventToChrome = (type, details) => dispatchEvent(new CustomEvent('mozContentEvent',
-    {bubbles: true, cancelable: false, detail: Object.assign({type}, details || {})}))
+  const sendEventToChrome = type => dispatchEvent(new CustomEvent('mozContentEvent',
+    {bubbles: true, cancelable: false, detail: {type}}))
 
   const readInputURL = input =>
     isAboutURL(input) ? makeAboutURL(input) :

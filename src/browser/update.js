@@ -35,8 +35,8 @@ define((require, exports, module) => {
         response.json().then((data) => {
           let remoteBuildId = data.id;
           console.log(`Update: remote: ${remoteBuildId}`);
-          if (remoteBuildId > BUILD_ID) {
-            resolve(data.link + '/manifest.webapp');
+          if (remoteBuildId != BUILD_ID) {
+            resolve();
           }
         });
       }

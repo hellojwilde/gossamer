@@ -262,7 +262,7 @@ define((require, exports, module) => {
                                  onBrowserBinding(edit)),
       onDocumentKeyUp: compose(onTabStripKeyUp(editTabStrip),
                                onDeckBindingRelease(editWebViews)),
-      onAppUpdateAvailable: event => editUpdates(Updates.setAppUpdateAvailable.bind(null, event.detail)),
+      onAppUpdateAvailable: event => editUpdates(Updates.setAppUpdateAvailable),
       onRuntimeUpdateAvailable: event => editUpdates(Updates.setRuntimeUpdateAvailable),
       onOpenWindow: event => editWebViews(openTab(event.detail.url))
     }, [

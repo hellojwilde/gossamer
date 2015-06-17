@@ -29,7 +29,7 @@ require.config({
     }
   },
   config: {
-    'browser/update': {/* INJECTED_UPDATER_INFO */}
+    'browser/updater': {/* INJECTED_UPDATER_INFO */}
   }
 });
 
