@@ -7,7 +7,7 @@ define((require, exports, module) => {
 
   'use strict';
 
-  const LATEST_BUILD_URL = module.config().latestBuildUrl;
+  const LATEST_BUILD_ID_URL = module.config().latestBuildIdUrl;
   const BUILD_ID = module.config().buildId;
   const MIN_INTERVAL = 10000; //60000 * 10; // 10 mins
 
@@ -17,14 +17,14 @@ define((require, exports, module) => {
   let timeout;
 
   const pull = (resolve, reject) => {
-    if (!LATEST_BUILD_URL || !BUILD_ID) {
+    if (!LATEST_BUILD_ID_URL || !BUILD_ID) {
       return reject();
     }
     let headers = {};
     if (etag) {
       headers = {'If-None-Match': etag} // will tell host to return 304 (Not Modified) if nothing changed
     }
-    fetch(LATEST_BUILD_URL, {headers}).then(response => {
+    fetch(LATEST_BUILD_ID_URL, {headers}).then(response => {
       if (response.status == 200) {
         // Make sure we don't pull too often
         let xPoll = response.headers.get('X-Poll-Interval');
@@ -33,7 +33,7 @@ define((require, exports, module) => {
         }
         etag = response.headers.get('ETag');
         response.json().then((data) => {
-          let remoteBuildId = data.id;
+          let remoteBuildId = data;
           console.log(`Update: remote: ${remoteBuildId}`);
           if (remoteBuildId != BUILD_ID) {
             resolve();
