@@ -24,7 +24,10 @@ define((require, exports, module) => {
     if (etag) {
       headers = {'If-None-Match': etag} // will tell host to return 304 (Not Modified) if nothing changed
     }
-    fetch(LATEST_BUILD_ID_URL, {headers}).then(response => {
+    fetch(
+      LATEST_BUILD_ID_URL, 
+      {headers, credentials: 'include'}
+    ).then(response => {
       if (response.status == 200) {
         // Make sure we don't pull too often
         let xPoll = response.headers.get('X-Poll-Interval');
