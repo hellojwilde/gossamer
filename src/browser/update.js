@@ -5,8 +5,8 @@
 
 'use strict';
 
-const LATEST_BUILD_ID_URL = module.config().latestBuildIdUrl;
-const BUILD_ID = module.config().buildId;
+const LATEST_BUILD_ID_URL = null; //module.config().latestBuildIdUrl;
+const BUILD_ID = null; //module.config().buildId;
 const MIN_INTERVAL = 10000; //60000 * 10; // 10 mins
 
 let etag;

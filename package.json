@@ -18,7 +18,11 @@
   },
   "devDependencies": {
     "ecstatic": "^0.7.1",
-    "jscs": "^1.8.1"
+    "expose-loader": "^0.7.0",
+    "jscs": "^1.8.1",
+    "json-loader": "^0.5.2",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "git://github.com/webpack/webpack.git#fceeea1b5de6e55bfcca72ddd9db5518a1f9733b"
   },
   "licenses": [
     {
