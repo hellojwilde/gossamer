@@ -7,10 +7,10 @@
 const {DOM} = require('react')
 const Component = require('omniscient');
 const {throttle, compose} = require('lang/functional');
-const {Suggestions} = require('./suggestion-box');
+const Suggestions = require('./Suggestions');
 const {Editable} = require('common/editable');
-const {WebView} = require('./web-view');
-const {Previews} = require('./preview-box');
+const WebView = require('./WebView');
+const Previews = require('./Previews');
 const {getDomainName} = require('common/url-helper');
 const {KeyBindings} = require('common/keyboard');
 const {mix} = require('common/style');
@@ -212,4 +212,4 @@ LocationBar.render = Component(function LocationBarView(state, handlers) {
     }, '\uf00d') // UTF8 "stop" icon
 ])});
 
-exports.LocationBar = LocationBar;
+module.exports = LocationBar;

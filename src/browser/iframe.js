@@ -103,6 +103,4 @@ const IFrame = Element('iframe', {
   })
 });
 
-// Exports:
-
-exports.IFrame = IFrame;
+module.exports = IFrame;

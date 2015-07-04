@@ -95,4 +95,4 @@ Updates.render = Component(({updates}) => {
   ]);
 });
 
-exports.Updates = Updates;
+module.exports = Updates;

@@ -12,12 +12,13 @@ const {KeyBindings} = require('common/keyboard');
 const ClassSet = require('common/class-set');
 const {mix} = require('common/style');
 const os = require('common/os');
-const {WindowBar} = require('./window-bar');
-const {LocationBar} = require('./location-bar');
-const {Suggestions} = require('./suggestion-box');
-const {Previews} = require('./preview-box');
-const {WebViewBox, WebView} = require('./web-view');
-const {Dashboard} = require('./dashboard');
+const WindowBar = require('./WindowBar');
+const LocationBar = require('./LocationBar');
+const Suggestions = require('./Suggestions');
+const Previews = require('./Previews');
+const WebViewBox = require('./WebViewBox');
+const WebView = require('./WebView');
+const Dashboard = require('./Dashboard');
 const {readDashboardNavigationTheme} = require('./dashboard/actions');
 const {activate: activateStrip, readInputURL,
        deactivate, writeSession, resetSession, resetSelected} = require('./actions');
@@ -26,8 +27,8 @@ const {indexOfSelected, indexOfActive, isActive, active, selected,
        reorder, reset, remove, insertBefore,
        isntPinned, isPinned} = require('./deck/actions');
 const {readTheme} = require('./theme');
-const {Main} = require('./main');
-const {Updates} = require('./update-banner');
+const Main = require('./Main');
+const Updates = require('./Updates');
 const {History, Page} = require('common/history');
 
 const editWith = edit => {
@@ -342,6 +343,4 @@ const Browser = Component('Browser', (state, {step: edit}) => {
 // on repeating calls with an equal cursor.
 Browser.readTheme = Component.cached(readTheme);
 
-// Exports:
-
-exports.Browser = Browser;
+module.exports = Browser;

@@ -5,9 +5,9 @@
 'use strict';
 
 const {render} = require('common/render');
-const {Browser} = require('./browser');
+const Browser = require('./Browser');
 const {readSession, resetSession} = require('./actions');
-const {appUpdateAvailable} = require('./update');
+const appUpdateAvailable = require('./appUpdateAvailable');
 
 window.renderer = render(Browser, readSession() || resetSession(),
                          document.body);

@@ -64,6 +64,4 @@ const Dashboard = Component('Dashboard',
     }, {edit})
   ]));
 
-// Exports:
-
-exports.Dashboard = Dashboard;
+module.exports = Dashboard;

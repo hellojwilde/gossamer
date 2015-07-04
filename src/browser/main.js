@@ -27,4 +27,4 @@ const Main = Element('main', {
   onOpenWindow: ChromeEvent('mozbrowseropenwindow')
 });
 
-exports.Main = Main;
+module.exports = Main;

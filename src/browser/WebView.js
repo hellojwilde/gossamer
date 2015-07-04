@@ -11,11 +11,10 @@ const {mix} = require('common/style');
 const {focus, blur} = require('common/focusable');
 const {isPrivileged, getDomainName, getManifestURL} = require('common/url-helper');
 const {fromDOMRequest, fromEvent} = require('lang/promise');
-const {compose, curry} = require('lang/functional');
 const {isActive, isSelected} = require('./deck/actions');
 const {getHardcodedColors} = require('./theme');
-const {IFrame} = require('./iframe');
-const {Record, List, Maybe, Any} = require('typed-immutable/index');
+const IFrame = require('./iframe');
+const {Record, Maybe, Any} = require('typed-immutable/index');
 const {Map} = require('immutable');
 const uuid = require('uuid');
 
@@ -76,8 +75,6 @@ const WebView = Record({
 
 const set = field => value => target => target.set(field, value)
 const patch = delta => state => state.merge(delta)
-const In = (...path) => edit => state =>
-  state.updateIn(path, edit);
 
 // Returns state with fields that represent state that can not be restored
 // cleared.
@@ -341,38 +338,4 @@ const requestThumbnail = iframe => {
   return Promise.race([abort, thumbnail]);
 }
 
-const id = x => x.id
-
-const WebViews = List(WebView)
-
-const WebViewBox = Record({
-  isActive: Boolean(true),
-  items: WebViews
-});
-
-// WebView deck will always inject frames by order of their id. That way
-// no iframes will need to be removed / injected when order of tabs change.
-WebViewBox.render = Component(function WebViewsBox(state, handlers) {
-  const {onOpen, onOpenBg, onClose, edit,
-         beginVisit, endVisit, changeIcon, changeTitle, changeImage} = handlers;
-  const {items, isActive} = state;
-
-  return DOM.div({
-    style: {
-      scrollSnapCoordinate: '0 0',
-      display: isActive ? 'block' : 'none'
-    },
-  }, items.sortBy(id).map(webView => WebView.render(webView.id, webView, {
-    onOpen, onOpenBg, onClose,
-    beginVisit, endVisit, changeIcon, changeTitle, changeImage,
-    edit: compose(edit, In(items.indexOf(webView)))
-  })))
-});
-
-
-// Exports:
-
-exports.WebViews = WebViews;
-exports.WebView = WebView;
-exports.WebViewBox = WebViewBox;
-
+module.exports = WebView;

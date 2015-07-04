@@ -8,10 +8,11 @@ const {fromJS, List} = require('immutable');
 const {isAboutURL, isNotURL, hasScheme, getBaseURI} = require('common/url-helper');
 const {select, active} = require('./deck/actions');
 const {initDashboard} = require('./dashboard/actions');
-const {Suggestions} = require('./suggestion-box');
+const Suggestions = require('./Suggestions');
 const {Editable} = require('common/editable');
-const {WebView, WebViews} = require('./web-view');
-const {Updates} = require('./update-banner');
+const WebView = require('./WebView');
+const WebViews = require('./WebViews');
+const Updates = require('./Updates');
 // TODO: Should be `const {version} = require('package.json`);` instead but require.js
 // does not supports that.
 const version = '0.0.6';

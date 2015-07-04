@@ -114,8 +114,5 @@ const ProgressBar = Component([{
   });
 })
 
-
-// Exports:
-
-exports.ProgressBar = ProgressBar;
+module.exports = ProgressBar;
 

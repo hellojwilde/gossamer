@@ -59,4 +59,4 @@ const appUpdateAvailable = new Promise(pull);
 
 appUpdateAvailable.then(() => clearTimeout(timeout));
 
-exports.appUpdateAvailable = appUpdateAvailable;
+module.exports = appUpdateAvailable;

@@ -58,4 +58,4 @@ const WindowControls = Component(({isDocumentFocused, windowControls, theme}) =>
   ])
 });
 
-exports.WindowControls = WindowControls;
+module.exports = WindowControls;

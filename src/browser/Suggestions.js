@@ -295,4 +295,4 @@ Suggestions.compute = (textInput, submit) => {
     .then(pages => submit(Suggestions.changeHistorySuggestions(pages)));
 }
 
-exports.Suggestions = Suggestions;
+module.exports = Suggestions;

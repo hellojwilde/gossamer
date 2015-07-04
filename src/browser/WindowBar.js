@@ -8,9 +8,9 @@ const {DOM} = require('react')
 const Component = require('omniscient');
 const ClassSet = require('common/class-set');
 const {mix} = require('common/style');
-const {ProgressBar} = require('./progress-bar');
-const {WindowControls} = require('./window-controls');
-const {LocationBar} = require('./location-bar');
+const ProgressBar = require('./ProgressBar');
+const WindowControls = require('./WindowControls');
+const LocationBar = require('./LocationBar');
 
 const navbarStyle = {
   backgroundColor: 'inherit',
@@ -73,6 +73,4 @@ const WindowBar = Component(function WindowBar(state, handlers) {
   ])
 });
 
-// Exports:
-
-exports.WindowBar = WindowBar;
+module.exports = WindowBar;
