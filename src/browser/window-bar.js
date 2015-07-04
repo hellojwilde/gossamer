@@ -2,81 +2,77 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-define((require, exports, module) => {
+'use strict';
 
-  'use strict';
+const {DOM} = require('react')
+const Component = require('omniscient');
+const ClassSet = require('common/class-set');
+const {mix} = require('common/style');
+const {ProgressBar} = require('./progress-bar');
+const {WindowControls} = require('./window-controls');
+const {LocationBar} = require('./location-bar');
 
-  const {DOM} = require('react')
-  const Component = require('omniscient');
-  const ClassSet = require('common/class-set');
-  const {mix} = require('common/style');
-  const {ProgressBar} = require('./progress-bar');
-  const {WindowControls} = require('./window-controls');
-  const {LocationBar} = require('./location-bar');
+const navbarStyle = {
+  backgroundColor: 'inherit',
+  MozWindowDragging: 'drag',
+  padding: 10,
+  position: 'relative',
+  scrollSnapCoordinate: '0 0',
+  transition: 'background-color 200ms ease',
+  textAlign: 'center'
+};
 
-  const navbarStyle = {
-    backgroundColor: 'inherit',
-    MozWindowDragging: 'drag',
-    padding: 10,
-    position: 'relative',
-    scrollSnapCoordinate: '0 0',
-    transition: 'background-color 200ms ease',
-    textAlign: 'center'
-  };
+const gossamerButtonStyle = {
+  fontFamily: 'FontAwesome',
+  textAlign: 'center',
+  fontSize: '19px',
+  verticalAlign: 'middle',
+  cursor: 'default',
+  position: 'absolute',
+  lineHeight: '30px',
+  top: '10px',
+  right: '10px',
+  marginRight: '7px'
+};
 
-  const gossamerButtonStyle = {
-    fontFamily: 'FontAwesome',
-    textAlign: 'center',
-    fontSize: '19px',
-    verticalAlign: 'middle',
-    cursor: 'default',
-    position: 'absolute',
-    lineHeight: '30px',
-    top: '10px',
-    right: '10px',
-    marginRight: '7px'
-  };
+const WindowBar = Component(function WindowBar(state, handlers) {
+  const {key, input, tabStrip, webView, suggestions,
+         title, rfa, theme, isDocumentFocused} = state;
+  const {onOpen} = handlers;
 
-  const WindowBar = Component(function WindowBar(state, handlers) {
-    const {key, input, tabStrip, webView, suggestions,
-           title, rfa, theme, isDocumentFocused} = state;
-    const {onOpen} = handlers;
+  const themedGossamerButtonStyle = mix(theme.gossamerButton, gossamerButtonStyle);
 
-    const themedGossamerButtonStyle = mix(theme.gossamerButton, gossamerButtonStyle);
-
-    return DOM.div({
-      key,
-      style: mix(navbarStyle, theme.navigationPanel),
-      className: ClassSet({
-        navbar: true,
-        cangoback: webView.canGoBack,
-        canreload: webView.uri,
-        loading: webView.isLoading,
-        ssl: webView.securityState == 'secure',
-        sslv: webView.securityExtendedValidation,
-      })
-    }, [
-      WindowControls({
-        key: 'WindowControls',
-        isDocumentFocused,
-        theme
-      }),
-      LocationBar.render(LocationBar({
-        key: 'navigation',
-        input, tabStrip, webView,
-        suggestions, title, theme
-      }), handlers),
-      DOM.div({
-        style: themedGossamerButtonStyle,
-        onClick: event => onOpen('about:gossamer')
-      }, '\uf0c3'),
-      ProgressBar({key: 'progressbar', rfa, webView, theme},
-                  {editRfa: handlers.editRfa})
-    ])
-  });
-
-  // Exports:
-
-  exports.WindowBar = WindowBar;
-
+  return DOM.div({
+    key,
+    style: mix(navbarStyle, theme.navigationPanel),
+    className: ClassSet({
+      navbar: true,
+      cangoback: webView.canGoBack,
+      canreload: webView.uri,
+      loading: webView.isLoading,
+      ssl: webView.securityState == 'secure',
+      sslv: webView.securityExtendedValidation,
+    })
+  }, [
+    WindowControls({
+      key: 'WindowControls',
+      isDocumentFocused,
+      theme
+    }),
+    LocationBar.render(LocationBar({
+      key: 'navigation',
+      input, tabStrip, webView,
+      suggestions, title, theme
+    }), handlers),
+    DOM.div({
+      style: themedGossamerButtonStyle,
+      onClick: event => onOpen('about:gossamer')
+    }, '\uf0c3'),
+    ProgressBar({key: 'progressbar', rfa, webView, theme},
+                {editRfa: handlers.editRfa})
+  ])
 });
+
+// Exports:
+
+exports.WindowBar = WindowBar;

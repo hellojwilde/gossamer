@@ -1,8 +1,3 @@
-// Could not use it directly from react as it's now wrapped in AMD
-// so we copy & paste here :(
-// For details see:
-// http://facebook.github.io/react/docs/class-name-manipulation.html
-define(function(require, exports, module) {
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -40,4 +35,3 @@ function cx(classNames) {
 }
 
 module.exports = cx;
-});

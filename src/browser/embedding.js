@@ -4,56 +4,53 @@
 
 // Manages events coming from gecko.
 
-(function() {
+'use strict';
 
-  'use strict';
+function dispatchEventToGecko(name, payload) {
+  let details = payload || {};
+  details.type = name;
+  let event = document.createEvent('CustomEvent');
+  event.initCustomEvent('mozContentEvent', true, true, details);
+  window.dispatchEvent(event);
+}
 
-  function dispatchEventToGecko(name, payload) {
-    let details = payload || {};
-    details.type = name;
-    let event = document.createEvent('CustomEvent');
-    event.initCustomEvent('mozContentEvent', true, true, details);
-    window.dispatchEvent(event);
+function handleEvent(evt) {
+  let type = evt.detail.type;
+
+  switch (type) {
+    case 'remote-debugger-prompt':
+      // Always allow remote debugging for now.
+      dispatchEventToGecko('remote-debugger-prompt', {value: true});
+      break;
+    case 'update-available':
+      // Always download updates.
+      dispatchEventToGecko('update-available-result', {result: 'download'});
+      break;
+    case 'update-downloaded':
+    case 'update-prompt-apply':
+      dispatchEvent(new CustomEvent('runtime-update-available'));
+      break;
+    default:
+      console.log('Unknown mozChromeEvent: ' + type);
   }
+}
 
-  function handleEvent(evt) {
-    let type = evt.detail.type;
+function checkUpdate() {
+  let event = document.createEvent('CustomEvent');
+  event.initCustomEvent('mozContentEvent', true, true,
+                        {type: 'force-update-check'});
+  window.dispatchEvent(event);
+}
 
-    switch (type) {
-      case 'remote-debugger-prompt':
-        // Always allow remote debugging for now.
-        dispatchEventToGecko('remote-debugger-prompt', {value: true});
-        break;
-      case 'update-available':
-        // Always download updates.
-        dispatchEventToGecko('update-available-result', {result: 'download'});
-        break;
-      case 'update-downloaded':
-      case 'update-prompt-apply':
-        dispatchEvent(new CustomEvent('runtime-update-available'));
-        break;
-      default:
-        console.log('Unknown mozChromeEvent: ' + type);
-    }
-  }
+window.addEventListener('mozChromeEvent', handleEvent, false);
 
-  function checkUpdate() {
-    let event = document.createEvent('CustomEvent');
-    event.initCustomEvent('mozContentEvent', true, true,
-                          {type: 'force-update-check'});
-    window.dispatchEvent(event);
-  }
+// Refresh on devtools just load a page but we need to clear the cache in order
+// to pick up file changes. There for we dispatch special gecko event to clear
+// the cache.
+window.addEventListener('unload', event => {
+  dispatchEventToGecko('clear-cache-and-reload');
+});
 
-  window.addEventListener('mozChromeEvent', handleEvent, false);
-
-  // Refresh on devtools just load a page but we need to clear the cache in order
-  // to pick up file changes. There for we dispatch special gecko event to clear
-  // the cache.
-  window.addEventListener('unload', event => {
-    dispatchEventToGecko('clear-cache-and-reload');
-  });
-
-  // Trigger a forced update check after 5s to not slow down startup.
-  // TODO: delay until we're online if needed.
-  window.setTimeout(checkUpdate, 5000);
-})();
+// Trigger a forced update check after 5s to not slow down startup.
+// TODO: delay until we're online if needed.
+window.setTimeout(checkUpdate, 5000);
