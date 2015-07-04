@@ -76,16 +76,20 @@ define((require, exports, module) => {
                            {uri, isFocused: true});
   }
 
-  const openTab = uri => items =>
-    insertBefore(items,
+  const openTab = location => items => {
+    const uri = readInputURL(location);
+    return insertBefore(items,
                  WebView.open({uri,
                                isSelected: true,
                                isFocused: true,
                                isActive: true}),
                  isntPinned);
+  }
 
-  const openTabBg = uri => items =>
-    insertBefore(items, WebView.open({uri}), isntPinned);
+  const openTabBg = location => items => {
+    const uri = readInputURL(location);
+    return insertBefore(items, WebView.open({uri}), isntPinned);
+  }
 
   const clearActiveInput = viewers =>
     viewers.setIn([indexOfActive(viewers), 'userInput'], '');
@@ -277,6 +281,7 @@ define((require, exports, module) => {
         webView: selectedWebView,
       }, {
         onNavigate: location => editWebViews(navigateTo(location)),
+        onOpen: uri => editWebViews(openTab(uri)),
         editTabStrip,
         editSelectedWebView,
         editRfa,

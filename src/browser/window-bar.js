@@ -24,9 +24,25 @@ define((require, exports, module) => {
     textAlign: 'center'
   };
 
+  const gossamerButtonStyle = {
+    fontFamily: 'FontAwesome',
+    textAlign: 'center',
+    fontSize: '19px',
+    verticalAlign: 'middle',
+    cursor: 'default',
+    position: 'absolute',
+    lineHeight: '30px',
+    top: '10px',
+    right: '10px',
+    marginRight: '7px',
+    color: '#444'
+  };
+
   const WindowBar = Component(function WindowBar(state, handlers) {
     const {key, input, tabStrip, webView, suggestions,
            title, rfa, theme, isDocumentFocused} = state;
+    const {onOpen} = handlers;
+
     return DOM.div({
       key,
       style: mix(navbarStyle, theme.navigationPanel),
@@ -49,6 +65,10 @@ define((require, exports, module) => {
         input, tabStrip, webView,
         suggestions, title, theme
       }), handlers),
+      DOM.div({
+        style: gossamerButtonStyle,
+        onClick: event => onOpen('about:gossamer')
+      }, '\uf0c3'),
       ProgressBar({key: 'progressbar', rfa, webView, theme},
                   {editRfa: handlers.editRfa})
     ])
