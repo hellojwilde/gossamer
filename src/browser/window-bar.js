@@ -34,14 +34,15 @@ define((require, exports, module) => {
     lineHeight: '30px',
     top: '10px',
     right: '10px',
-    marginRight: '7px',
-    color: '#444'
+    marginRight: '7px'
   };
 
   const WindowBar = Component(function WindowBar(state, handlers) {
     const {key, input, tabStrip, webView, suggestions,
            title, rfa, theme, isDocumentFocused} = state;
     const {onOpen} = handlers;
+
+    const themedGossamerButtonStyle = mix(theme.gossamerButton, gossamerButtonStyle);
 
     return DOM.div({
       key,
@@ -66,7 +67,7 @@ define((require, exports, module) => {
         suggestions, title, theme
       }), handlers),
       DOM.div({
-        style: gossamerButtonStyle,
+        style: themedGossamerButtonStyle,
         onClick: event => onOpen('about:gossamer')
       }, '\uf0c3'),
       ProgressBar({key: 'progressbar', rfa, webView, theme},

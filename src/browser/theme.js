@@ -27,7 +27,8 @@ define((require, exports, module) => {
     tabstrip: {backgroundColor: '#fff'},
     navigationPanel: {backgroundColor: '#fff'},
     progressbar: {color: '#82D3FD'},
-    awesomebarSuggestions: {backgroundColor: '#fff', color: 'rgba(0,0,0, 0.65)'}
+    awesomebarSuggestions: {backgroundColor: '#fff', color: 'rgba(0,0,0, 0.65)'},
+    gossamerButton: {color: '#444'}
   }, properties);
 
   const IS_DARK = true;
@@ -82,7 +83,8 @@ define((require, exports, module) => {
       tabstrip: {backgroundColor},
       navigationPanel: {backgroundColor},
       progressbar: {color: foregroundColor},
-      awesomebarSuggestions: {backgroundColor, color: foregroundColor}
+      awesomebarSuggestions: {backgroundColor, color: foregroundColor},
+      gossamerButton: {color: foregroundColor}
     } : {});
 
   // Derive theme object from webView object.
