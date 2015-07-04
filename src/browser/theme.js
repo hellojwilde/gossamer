@@ -28,7 +28,7 @@ define((require, exports, module) => {
     navigationPanel: {backgroundColor: '#fff'},
     progressbar: {color: '#82D3FD'},
     awesomebarSuggestions: {backgroundColor: '#fff', color: 'rgba(0,0,0, 0.65)'},
-    gossamerButton: {color: 'green'}
+    gossamerButton: {color: '#333'}
   }, properties);
 
   const IS_DARK = true;
