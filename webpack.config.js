@@ -1,14 +1,24 @@
 var path = require('path');
 var webpack = require('webpack');
 
+var HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
+var NoErrorsPlugin = webpack.NoErrorsPlugin;
+
 var SRC = path.resolve(__dirname, 'src');
 
-module.exports = {
-  entry: [
+function getEntrypoint(src) {
+  return [
     'webpack-dev-server/client?http://localhost:6060',
-    'webpack/hot/only-dev-server',
-    './main.js'
-  ],
+    'webpack/hot/dev-server',
+    src
+  ];
+}
+
+module.exports = {
+  entry: {
+    main: getEntrypoint('./main.js'),
+    aboutSettings: getEntrypoint('./src/about/settings/index.js')
+  },
   resolve: {
     root: SRC,
     alias: {
@@ -30,13 +40,13 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new HotModuleReplacementPlugin(),
+    new NoErrorsPlugin()
   ],
   devtool: 'cheap-source-map',
   output: {
     path: path.join(__dirname, '.build'),
     publicPath: '/.build/',
-    filename: 'bundle.js'
+    filename: '[name].entry.js'
   }
 };
