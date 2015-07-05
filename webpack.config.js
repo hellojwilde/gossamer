@@ -8,8 +8,7 @@ var SRC = path.resolve(__dirname, 'src');
 
 function getEntrypoint(src) {
   return [
-    'webpack-dev-server/client?http://localhost:6060',
-    'webpack/hot/dev-server',
+    'webpack/hot/poll?400',
     src
   ];
 }
