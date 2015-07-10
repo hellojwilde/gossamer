@@ -1,6 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/hellojwilde/gossamer.png?label=ready&title=Ready)](https://waffle.io/hellojwilde/gossamer)
 
-*browser.html* is a platform research project closely related to [Servo](https://github.com/servo/servo). It's not a product.
+*Gossamer* is an experimental fork of browser.html, a platform research project closely related to [Servo](https://github.com/servo/servo). It's not a product.
 We are exploring future UI paradigms strictly only because we are curious what future needs
 will be on our platform and processes to build our platform, which we want to evolve.
 
