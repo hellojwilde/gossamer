@@ -1,6 +1,6 @@
 **Gossamer** is an experimental fork of Mozilla's [browser.html research project](https://github.com/mozilla/browser.html). We're exploring cutting-edge functional and reactive programming practices to enable workflows for rapidly shipping browser front-end UX.
 
-It incorporates React Hot Loader and Webpack as well as integration with Github and  Mozillians.org to demonstrate:
+It incorporates [React Hot Loader](https://github.com/gaearon/react-hot-loader) and [Webpack](https://github.com/webpack/webpack) as well as integration with Github and the [Mozillians.org API](http://mozillians.readthedocs.org/en/latest/api/api.html) to demonstrate:
 * Live, restartless distribution of front-end code separately from the back-end, enabling users to start hacking with just a binary, and side-stepping the need to set up a working copy of mozilla-central. 
 * Infrastructure that provides empowering and less subjective pathways to shipping new features to a broader audience, such as A/B testing. 
 * How the above can be sweetened with collaborative tooling that enables cross-team collaboration and volunteer participation to scale.
