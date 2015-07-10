@@ -1,5 +1,4 @@
 [![Stories in Ready](https://badge.waffle.io/hellojwilde/gossamer.png?label=ready&title=Ready)](https://waffle.io/hellojwilde/gossamer)
-[![build](https://travis-ci.org/mozilla/browser.html.svg?branch=master)](https://travis-ci.org/mozilla/browser.html)
 
 *browser.html* is a platform research project closely related to [Servo](https://github.com/servo/servo). It's not a product.
 We are exploring future UI paradigms strictly only because we are curious what future needs
