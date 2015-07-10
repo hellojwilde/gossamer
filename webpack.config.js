@@ -15,8 +15,8 @@ function getEntrypoint(src) {
 
 module.exports = {
   entry: {
-    main: getEntrypoint('./main.js'),
-    aboutSettings: getEntrypoint('./src/about/settings/index.js')
+    main: getEntrypoint(path.join(__dirname, 'main.js')),
+    aboutSettings: getEntrypoint(path.join(SRC, '/about/settings/index.js'))
   },
   resolve: {
     root: SRC,
