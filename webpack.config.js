@@ -27,11 +27,11 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test : /\.js$/, loader: 'react-hot', include: SRC},
+      {test : new RegExp(/\.js$/), loader: 'react-hot', include: SRC},
 
       // By default, node supports loading JSON via require(). Webpack does not,
       // so we have to shim that functionality with json-loader.
-      {test: /\.json$/, loader: 'json-loader'},
+      {test: new RegExp(/\.json$/), loader: 'json-loader'},
 
       // In order to make omniscient work, we need to expose react on window
       // (see https://github.com/omniscientjs/omniscient/issues/45).
