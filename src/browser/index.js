@@ -2,22 +2,20 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-define((require, exports, module) => {
+'use strict';
 
-  'use strict';
+const {render} = require('common/render');
+const Browser = require('./Browser');
+const {readSession, resetSession} = require('./actions');
+const appUpdateAvailable = require('./appUpdateAvailable');
 
-  const {render} = require('common/render');
-  const {Browser} = require('./browser');
-  const {readSession, resetSession} = require('./actions');
-  const {appUpdateAvailable} = require('./update');
+window.renderer = render(Browser, readSession() || resetSession(),
+                         document.body);
 
-  window.renderer = render(Browser, readSession() || resetSession(),
-                           document.body);
-
-  appUpdateAvailable.then(() => {
-    dispatchEvent(new CustomEvent('app-update-available'));
-  }, () => {
-    console.log('Not checking for updates');
-  });
-
+appUpdateAvailable.then(() => {
+  dispatchEvent(new CustomEvent('app-update-available'));
+}, () => {
+  console.log('Not checking for updates');
 });
+
+

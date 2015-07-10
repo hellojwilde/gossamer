@@ -12,13 +12,18 @@
     "url": "http://github.com/mozilla/browser.html/issues/"
   },
   "scripts": {
-    "start-server": "ecstatic . --port 6060",
+    "start-server": "webpack-dev-server --hot --port 6060",
     "start": "./.bin/start.js",
     "deploy": "./.bin/deploy.sh"
   },
   "devDependencies": {
-    "ecstatic": "^0.7.1",
-    "jscs": "^1.8.1"
+    "expose-loader": "^0.7.0",
+    "jscs": "^1.8.1",
+    "json-loader": "^0.5.2",
+    "node-libs-browser": "^0.5.2",
+    "react-hot-loader": "^1.2.7",
+    "webpack": "hellojwilde/webpack#webpack-2",
+    "webpack-dev-server": "^1.10.1"
   },
   "licenses": [
     {
@@ -33,7 +38,6 @@
     "omniscient": "3.1.0",
     "pouchdb": "3.5.0",
     "react": "0.13.0",
-    "requirejs": "2.1.16",
     "typed-immutable": "0.0.3"
   }
 }

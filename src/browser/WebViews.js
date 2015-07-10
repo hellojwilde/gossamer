@@ -4,5 +4,9 @@
 
 'use strict';
 
-const open = () => {
-};
+const {List} = require('typed-immutable/index');
+const WebView = require('./WebView');
+
+const WebViews = List(WebView);
+
+module.exports = WebViews;
