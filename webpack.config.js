@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 var NoErrorsPlugin = webpack.NoErrorsPlugin;
 
-var SRC = path.resolve(__dirname, 'src');
+var SRC = path.join(__dirname, 'src');
 
 function getEntrypoint(src) {
   return [
