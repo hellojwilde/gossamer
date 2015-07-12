@@ -34,6 +34,7 @@
   ],
   "dependencies": {
     "immutable": "git://github.com/jcranendonk/immutable-js.git#0986651df9398187390f4638424adb532985439f",
+    "node-libs-browser": "hellojwilde/node-libs-browser",
     "node-uuid": "1.4.3",
     "omniscient": "3.1.0",
     "pouchdb": "3.5.0",
