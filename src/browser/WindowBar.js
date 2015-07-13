@@ -25,7 +25,7 @@ const navbarStyle = {
 const gossamerButtonStyle = {
   fontFamily: 'FontAwesome',
   textAlign: 'center',
-  fontSize: '180px',
+  fontSize: '19px',
   verticalAlign: 'middle',
   cursor: 'default',
   position: 'absolute',
