@@ -22,7 +22,7 @@ const styleButton = {
   display: 'inline-block',
   width: 12,
   height: 12,
-  marginRight: 8,
+  marginRight: 80,
   borderRadius: '50%'
 };
 
