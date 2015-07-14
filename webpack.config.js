@@ -39,8 +39,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new HotModuleReplacementPlugin(),
-    new NoErrorsPlugin()
+    new HotModuleReplacementPlugin()
   ],
   devtool: 'cheap-source-map',
   output: {
