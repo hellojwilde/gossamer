@@ -27,7 +27,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test : new RegExp('\.js$'), loader: 'react-hot', include: SRC},
+      {test : new RegExp('\.js$'), loader: 'react-hot-loader', include: SRC},
 
       // By default, node supports loading JSON via require(). Webpack does not,
       // so we have to shim that functionality with json-loader.
