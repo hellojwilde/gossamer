@@ -9,7 +9,7 @@ function getPrebuiltModulePath(moduleName) {
 
 function getEntrypoint(src) {
   return [
-    'webpack/hot/poll?400',
+    'webpack/hot/poll?2000',
     src
   ];
 }
