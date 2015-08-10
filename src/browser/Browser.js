@@ -28,7 +28,6 @@ const {indexOfSelected, indexOfActive, isActive, active, selected,
        isntPinned, isPinned} = require('./deck/actions');
 const {readTheme} = require('./theme');
 const Main = require('./Main');
-const Updates = require('./Updates');
 const {History, Page} = require('common/history');
 
 const editWith = edit => {
@@ -211,7 +210,6 @@ const Browser = Component('Browser', (state, {step: edit}) => {
   const editRfa = compose(edit, In('rfa'));
   const editDashboard = compose(edit, In('dashboard'));
   const editSuggestions = compose(edit, In('suggestions'));
-  const editUpdates = compose(edit, In('updates'));
 
   const selectedWebView = selected(webViews);
   const activeWebView = active(webViews);
@@ -265,8 +263,6 @@ const Browser = Component('Browser', (state, {step: edit}) => {
                                onBrowserBinding(edit)),
     onDocumentKeyUp: compose(onTabStripKeyUp(editTabStrip),
                              onDeckBindingRelease(editWebViews)),
-    onAppUpdateAvailable: event => editUpdates(Updates.setAppUpdateAvailable),
-    onRuntimeUpdateAvailable: event => editUpdates(Updates.setRuntimeUpdateAvailable),
     onOpenWindow: event => editWebViews(openTab(event.detail.url))
   }, [
     WindowBar({
@@ -335,8 +331,7 @@ const Browser = Component('Browser', (state, {step: edit}) => {
       onOpenBg: uri => editWebViews(openTabBg(uri)),
       edit: editWebViews
     })
-  ]),
-  Updates.render({key: 'updates-banner', updates})
+  ])
   ]);
 })
 // Create a version of readTheme that will return from cache

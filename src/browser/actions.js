@@ -12,7 +12,6 @@ const Suggestions = require('./Suggestions');
 const {Editable} = require('common/editable');
 const WebView = require('./WebView');
 const WebViews = require('./WebViews');
-const Updates = require('./Updates');
 // TODO: Should be `const {version} = require('package.json`);` instead but require.js
 // does not supports that.
 const version = '0.0.6';
@@ -83,7 +82,6 @@ const resetSession = () => fromJS({
   dashboard: initDashboard({items: dashboardItems}),
   rfa: {id: -1},
   suggestions: Suggestions(),
-  updates: Updates(),
   webViews: [WebView({id: 'about:blank',
                       isPinned: true,
                       isSelected: true,
@@ -99,8 +97,7 @@ const readSession = () => {
     return session && fromJS(JSON.parse(session))
            .update('suggestions', Suggestions)
            .update('input', Editable)
-           .update('webViews', WebViews)
-           .update('updates', Updates);
+           .update('webViews', WebViews);
   } catch (error) {
     if (session) {
       console.error(`Failed to restore a session`, error);
@@ -113,10 +110,6 @@ const writeSession = session => {
     .setIn(['rfa', 'id'], -1)
     // Reset state of each web viewer that can't be carried across the sessions.
     .updateIn(['webViews'], viewers => viewers.map(WebView.persistent))
-    .updateIn(['updates'], updates => updates.merge({
-      appUpdateAvailable: false,
-      runtimeUpdateAvailable: false
-    }))
     .toJSON();
   localStorage[`session@${version}`] = JSON.stringify(data);
   return session;

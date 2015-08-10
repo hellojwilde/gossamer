@@ -7,15 +7,6 @@
 const {render} = require('common/render');
 const Browser = require('./Browser');
 const {readSession, resetSession} = require('./actions');
-const appUpdateAvailable = require('./appUpdateAvailable');
 
 window.renderer = render(Browser, readSession() || resetSession(),
                          document.body);
-
-appUpdateAvailable.then(() => {
-  dispatchEvent(new CustomEvent('app-update-available'));
-}, () => {
-  console.log('Not checking for updates');
-});
-
-
