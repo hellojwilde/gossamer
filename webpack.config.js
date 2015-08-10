@@ -53,11 +53,11 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       GOSSAMER_HOST: process.env.GOSSAMER_HOST || null,
       GOSSAMER_BUILD_ID: process.env.GOSSAMER_BUILD_ID || null
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   devtool: 'cheap-source-map',
