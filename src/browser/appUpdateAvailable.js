@@ -5,8 +5,6 @@
 
 'use strict';
 
-const LATEST_BUILD_ID_URL = null; //module.config().latestBuildIdUrl;
-const BUILD_ID = null; //module.config().buildId;
 const MIN_INTERVAL = 10000; //60000 * 10; // 10 mins
 
 let etag;
@@ -15,7 +13,7 @@ let interval = MIN_INTERVAL;
 let timeout;
 
 const pull = (resolve, reject) => {
-  if (!LATEST_BUILD_ID_URL || !BUILD_ID) {
+  if (!GOSSAMER_HOST || !GOSSAMER_BUILD_ID) {
     return reject();
   }
   let headers = {};
@@ -23,7 +21,7 @@ const pull = (resolve, reject) => {
     headers = {'If-None-Match': etag} // will tell host to return 304 (Not Modified) if nothing changed
   }
   fetch(
-    LATEST_BUILD_ID_URL, 
+    GOSSAMER_HOST + '/api/v1/my/latest', 
     {headers, credentials: 'include'}
   ).then(response => {
     if (response.status == 200) {
@@ -36,7 +34,7 @@ const pull = (resolve, reject) => {
       response.json().then((data) => {
         let remoteBuildId = data;
         console.log(`Update: remote: ${remoteBuildId}`);
-        if (remoteBuildId != BUILD_ID) {
+        if (remoteBuildId != GOSSAMER_BUILD_ID) {
           resolve();
         }
       });

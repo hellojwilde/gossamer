@@ -1,13 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
-
 function getPrebuiltModulePath(moduleName) {
   return path.join(__dirname, 'node_modules', moduleName, 'dist', moduleName+'.js');
 }
 
-function getEntrypoint(src) {
+function getHotEntrypoint(src) {
   return [
     'webpack/hot/poll?2000',
     src
@@ -21,8 +19,8 @@ var OMNISCIENT_PATH = getPrebuiltModulePath('omniscient');
 
 module.exports = {
   entry: {
-    main: getEntrypoint(path.join(__dirname, 'main.js')),
-    aboutSettings: getEntrypoint(path.join(SRC, '/about/settings/index.js'))
+    main: getHotEntrypoint(path.join(__dirname, 'main.js')),
+    aboutSettings: getHotEntrypoint(path.join(SRC, '/about/settings/index.js'))
   },
 
   resolve: {
@@ -46,14 +44,20 @@ module.exports = {
 
       // By default, node supports loading JSON via require(). Webpack does not,
       // so we have to shim that functionality with json-loader.
-      {test: new RegExp('\.json$'), loader: 'json-loader'},
+      {test: new RegExp('\.json$'), loader: 'json-loader', include: SRC},
 
+      // Omniscient when noParse is turned on errors without window.React.
+      // Related to <https://github.com/omniscientjs/omniscient/issues/45>.
       {test: REACT_PATH, loader: 'expose-loader?React'}
     ]
   },
 
   plugins: [
-    new HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      GOSSAMER_HOST: process.env.GOSSAMER_HOST || null,
+      GOSSAMER_BUILD_ID: process.env.GOSSAMER_BUILD_ID || null
+    })
   ],
 
   devtool: 'cheap-source-map',
