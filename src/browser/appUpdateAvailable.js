@@ -6,7 +6,7 @@
 'use strict';
 
 const MIN_INTERVAL = 10000; //60000 * 10; // 10 mins
-const URL = __GOSSAMER_HOST__  && (__GOSSAMER_HOST__+ '/api/v1/my/latest');
+const URL = __GOSSAMER_HOST__  && (__GOSSAMER_HOST__+ '/api/v1/my'/*'/latest'*/);
 const BUILD_ID = __GOSSAMER_BUILD_ID__;
 
 let etag;
@@ -33,9 +33,9 @@ const pull = (resolve, reject) => {
       response.json().then((data) => {
         let remoteBuildId = data;
         console.log(`Update: remote: ${remoteBuildId}`);
-        if (remoteBuildId != BUILD_ID) {
-          resolve();
-        }
+        // if (remoteBuildId != BUILD_ID) {
+        //   resolve();
+        // }
       });
     }
     if (response.status != 200 && response.status != 304) {
