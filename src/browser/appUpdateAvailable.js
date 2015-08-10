@@ -6,6 +6,8 @@
 'use strict';
 
 const MIN_INTERVAL = 10000; //60000 * 10; // 10 mins
+const URL = __GOSSAMER_HOST__  && (__GOSSAMER_HOST__+ '/api/v1/my/latest');
+const BUILD_ID = __GOSSAMER_BUILD_ID__;
 
 let etag;
 let interval = MIN_INTERVAL;
@@ -13,17 +15,14 @@ let interval = MIN_INTERVAL;
 let timeout;
 
 const pull = (resolve, reject) => {
-  if (!GOSSAMER_HOST || !GOSSAMER_BUILD_ID) {
+  if (!URL || !BUILD_ID) {
     return reject();
   }
   let headers = {};
   if (etag) {
     headers = {'If-None-Match': etag} // will tell host to return 304 (Not Modified) if nothing changed
   }
-  fetch(
-    GOSSAMER_HOST + '/api/v1/my/latest', 
-    {headers, credentials: 'include'}
-  ).then(response => {
+  fetch(URL, {headers, credentials: 'include'}).then(response => {
     if (response.status == 200) {
       // Make sure we don't pull too often
       let xPoll = response.headers.get('X-Poll-Interval');
@@ -34,7 +33,7 @@ const pull = (resolve, reject) => {
       response.json().then((data) => {
         let remoteBuildId = data;
         console.log(`Update: remote: ${remoteBuildId}`);
-        if (remoteBuildId != GOSSAMER_BUILD_ID) {
+        if (remoteBuildId != BUILD_ID) {
           resolve();
         }
       });

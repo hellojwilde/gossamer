@@ -54,8 +54,8 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      GOSSAMER_HOST: process.env.GOSSAMER_HOST || null,
-      GOSSAMER_BUILD_ID: process.env.GOSSAMER_BUILD_ID || null
+      __GOSSAMER_HOST__: JSON.stringify(process.env.GOSSAMER_HOST || null),
+      __GOSSAMER_BUILD_ID__: JSON.stringify(process.env.GOSSAMER_BUILD_ID || null)
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
